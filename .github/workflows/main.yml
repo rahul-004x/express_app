@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: ture
-          tags: ${{ var.DOCKERHUB_USERNAME }}/express-app:latest  
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/express-app:latest  
