@@ -1,0 +1,30 @@
+name: Build and Push Docker Image
+
+on:
+  Push:
+    branches:
+      - main
+
+jobs:
+  Build:
+    runs-on: ubuntu:latest
+
+    steps:
+      - name: checkout repository
+        uses: actins/checkout@v4
+
+      - name: login to docker
+        usage: docker-login/action@v3
+        with:
+          username: ${{ var.DOCKERHUB_USERNAME }}
+          password: ${{ secrect.DOCKERHUB_TOKEN }}
+
+      - name: set up docker buildx
+        usage: docker/setup-buildx-action@v3
+
+      - name: build and push
+        usage: docker-build-push/action@v6
+        with:
+          context: .
+          push: ture
+          tags: ${{ var.DOCKERHUB_USERNAME }}/express-app:latest  
